@@ -1,4 +1,5 @@
 import { LightningElement, track } from 'lwc';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
 export default class TrackDecorator extends LightningElement {
     @track itemList = [];
@@ -9,8 +10,21 @@ export default class TrackDecorator extends LightningElement {
     }
 
     handleClick() {
-        this.itemList.push(this.newItem);
-        console.log('item list:', JSON.stringify(this.itemList));
+        if (!this.newItem) {
+            const event = new ShowToastEvent({
+                title: 'Errore',
+                message: 'Inserisci un elemento prima di aggiungerlo alla lista',
+                variant: 'error',
+            });
+            this.dispatchEvent(event);
+        } else {
+            this.itemList.push(this.newItem);
+        }
+    }
+
+    refreshList() {
+        this.itemList = [];
+        this.newItem = '';
     }
 }
 
