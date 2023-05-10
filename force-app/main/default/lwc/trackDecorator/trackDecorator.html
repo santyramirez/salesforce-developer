@@ -1,10 +1,26 @@
 <template>
     <div class="slds-grid slds-align_absolute-center">
         <div class="slds-size_1-of-2">
-            <lightning-card  variant="Narrow"  title="Hello" icon-name="standard:account">
-                <p class="slds-var-p-horizontal_small">Have a nice day</p>
-                <p slot="footer">U WILL PASS CERTIFICATION EXAM :)</p>
-            </lightning-card>
+            <lightning-card title="Item List" icon-name="standard:task2">
+                <div class="slds-var-p-around_medium">
+                    <lightning-input class="slds-var-m-bottom_small" label="Item" onchange={handleChange}></lightning-input>
+                    <lightning-button label="Add Item" onclick={handleClick}></lightning-button>
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-size_1-of-1">
+                            <div class="slds-text-heading_small slds-var-p-top_medium slds-var-p-bottom_medium">Item List</div>
+                            <ol>
+                                <template for:each={itemList} for:item="item" for:index="i">
+                                    <div key={item.i}>
+                                        <li class="slds-item">
+                                            {item}
+                                        </li>
+                                    </div>
+                                </template>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </lightning-card>  
         </div>
     </div>
 </template>
